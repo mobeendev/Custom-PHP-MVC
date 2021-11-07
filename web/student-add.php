@@ -1,7 +1,7 @@
 <?php require_once "web/header.php"; ?>
 
 <form name="frmAdd" method="post" action="" id="frmAdd"
-    onSubmit="return validate();">
+    onSubmit="return validate();" enctype="multipart/form-data">
     <div id="mail-status"></div>
     <div>
         <label style="padding-top: 20px;">Name</label> <span
@@ -22,7 +22,15 @@
         <input type="text" name="class" id="class" class="demoInputBox">
     </div>
     <div>
-        <input type="submit" name="add" id="btnSubmit" value="Add" />
+        <label>Picture</label> <span id="class-info" class="info"></span><br />
+        <input type="file" name="uploadfile" value="" />
+
+    </div>
+
+
+
+    <div>
+        <input type="submit" name="add" id="btnSubmit" value="Add"  />
     </div>
     </div>
 </form>

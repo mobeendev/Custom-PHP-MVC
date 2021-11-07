@@ -23,6 +23,7 @@
             <thead>
                 <tr>
                     <th><strong>ID#</strong></th>
+                    <th><strong>Photo</strong></th>
                     <th><strong>Student Name</strong></th>
                     <th><strong>Roll Number</strong></th>
                     <th><strong>Date of Birth</strong></th>
@@ -38,6 +39,9 @@
                             ?>
           <tr>
                     <td><?php echo $result[$k]["id"]; ?></td>
+                    <td>
+                        <img width="50" height="50" src="<?php echo $result[$k]["picture"]; ?>">
+                    </td>
                     <td><?php echo $result[$k]["name"]; ?></td>
                     <td><?php echo $result[$k]["roll_number"]; ?></td>
                     <td><?php echo $result[$k]["dob"]; ?></td>

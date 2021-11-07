@@ -9,17 +9,43 @@ class Student
     }
     
     function addStudent($name, $roll_number, $dob, $class) {
-        $query = "INSERT INTO tbl_student (name,roll_number,dob,class) VALUES (?, ?, ?, ?)";
-        $paramType = "siss";
+
+        if (isset($_POST['add'])) {
+
+            $filename = $_FILES["uploadfile"]["name"];
+            $tempname = $_FILES["uploadfile"]["tmp_name"];
+            $directoryName = 'images';
+            $random = substr( str_shuffle( str_repeat( 'abcdefghijklmnopqrstuvwxyz0123456789', 10 ) ), 0, 7 );
+            $folder = $directoryName."/".$random . '-'.$filename;
+
+
+            //Check if the directory already exists.
+            if(!is_dir($directoryName)){
+                //Directory does not exist, so lets create it.
+                mkdir($directoryName, 0755);
+            }
+
+            if (move_uploaded_file($tempname, $folder))  {
+//                $msg = "Image uploaded successfully";
+            }else{
+//                $msg = "Failed to upload image";
+            }
+
+
+        $query = "INSERT INTO tbl_student (name,roll_number,dob,class, picture) VALUES (?, ?, ?, ?, ?)";
+        $paramType = "sisss";
         $paramValue = array(
             $name,
             $roll_number,
             $dob,
-            $class
+            $class,
+            $folder
         );
         
         $insertId = $this->db_handle->insert($query, $paramType, $paramValue);
         return $insertId;
+        }
+        return;
     }
     
     function editStudent($name, $roll_number, $dob, $class, $student_id) {
