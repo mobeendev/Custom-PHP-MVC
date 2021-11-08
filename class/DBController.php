@@ -74,8 +74,8 @@ class DBController {
     
     function insert($query, $param_type, $param_value_array) {
 
-//        die($query);
         $sql = $this->conn->prepare($query);
+//        die($sql);
         $this->bindQueryParams($sql, $param_type, $param_value_array);
         $sql->execute();
         $insertId = $sql->insert_id;

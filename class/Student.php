@@ -97,5 +97,35 @@ class Student
         $result = $this->db_handle->count($total_pages_sql, $no_of_records_per_page);
         return $result;
     }
+
+    public function login($data)
+    {
+        extract($data);
+
+        $query = "SELECT * FROM tbl_student WHERE roll_number = ?";
+        $paramType = "i";
+        $paramValue = array(
+            $roll_number
+        );
+
+        $result = $this->db_handle->runQuery($query, $paramType, $paramValue);
+
+        if(is_array($result))
+        {
+            $result = $result[0];
+            $_SESSION["id"] = $result['id'];
+            $_SESSION["email"]=$result['email'];
+            $_SESSION["name"]=$result['name'];
+            $_SESSION["rollno"]=$result['roll_number'];
+            $_SESSION['loggedin'] = true;
+            print_r($_SESSION);
+
+            header("Location: index.php");
+        }
+        else
+        {
+            echo "Invalid Email ID/Password";
+        }
+    }
 }
 ?>

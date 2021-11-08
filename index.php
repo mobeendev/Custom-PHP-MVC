@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once ("class/DBController.php");
 require_once ("class/Student.php");
 require_once ("class/Attendance.php");
@@ -11,6 +13,23 @@ if (! empty($_GET["action"])) {
     $action = $_GET["action"];
 }
 switch ($action) {
+
+    case "logout":
+        session_start();
+        session_destroy();
+        header("Location:index.php");
+        break;
+
+
+    case "login":
+        if(isset($_POST['process_login']))
+        {
+            $student = new Student();
+            $studentResult = $student->login($_POST);
+        }
+        require_once "web/login.php";
+    break;
+
     case "attendance-add":
         if (isset($_POST['add'])) {
             $attendance = new Attendance();
@@ -189,7 +208,7 @@ switch ($action) {
             $class = $_POST['class'];
             $teacher->editTeacher($name, $class, $teacher_id);
 
-            header("Location: index.php?action=teacher");
+            header("Location: index.php?action=teacherqq≈ç");
         }
 
         $result = $teacher->getTeacherById($teacher_id);
